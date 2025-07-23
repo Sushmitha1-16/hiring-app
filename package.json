@@ -1,0 +1,14 @@
+{
+  "name": "hiring-app",
+  "version": "1.0.0",
+  "description": "Simple Node.js app for Docker deployment",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Sushma",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
