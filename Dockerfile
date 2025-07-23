@@ -1,13 +1,20 @@
-FROM tomcat:8.0.20-jre8
+ # Use official Node.js LTS image as base
+FROM node:18
 
-# Correct Nexus IP address
-ENV NEXUS_REPO_URL="http://18.191.181.115:8081/repository/hiring-app/"
-ENV ARTIFACT_PATH="junit/hiring/0.1/hiring-0.1.war"
+# Set the working directory inside the container
+WORKDIR /app
 
-# Download WAR from Nexus and deploy
-ADD $NEXUS_REPO_URL$ARTIFACT_PATH /usr/local/tomcat/webapps/hiring.war
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+# Install dependencies
+RUN npm install
 
+# Copy the rest of the app code
+COPY . .
 
+# Expose the app port (change if using a different one)
+EXPOSE 3000
+
+# Start the Node.js application
+CMD ["npm", "start"]
